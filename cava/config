@@ -1,0 +1,28 @@
+[color]
+
+gradient = 1
+
+gradient_color_1 = '#BD77F9'
+gradient_color_2 = '#BD66F9'
+gradient_color_3 = '#BD55F9'
+gradient_color_4 = '#BD44F9'
+gradient_color_5 = '#BD33F9'
+gradient_color_6 = '#BE22F9'
+gradient_color_7 = '#C011Ff'
+gradient_color_8 = '#BF00Ff'
+
+[output]
+
+# Output method. Can be 'ncurses', 'noncurses', 'raw', 'noritake' or 'sdl'.
+# 'noncurses' uses a custom framebuffer technique and prints only changes
+# from frame to frame in the terminal. 'ncurses' is default if supported.
+#
+# 'raw' is an 8 or 16 bit (configurable via the 'bit_format' option) data
+# stream of the bar heights that can be used to send to other applications.
+# 'raw' defaults to 200 bars, which can be adjusted in the 'bars' option above.
+#
+# 'noritake' outputs a bitmap in the format expected by a Noritake VFD display
+#  in graphic mode. It only support the 3000 series graphical VFDs for now.
+#
+# 'sdl' uses the Simple DirectMedia Layer to render in a graphical context.
+method = ncurses
