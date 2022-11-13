@@ -1,44 +1,23 @@
-"
-"
-" Vim/Nvim configuration
-"
-" https://github.com/tpope/vim-fugitive
-" https://github.com/udalov/kotlin-vim
-" https://github.com/junegunn/vim-plug
-" https://github.com/puremourning/vimspector
-
-"
-" plugins
-"
+" ==================================
+" Plugins
+" ==================================
 call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'scrooloose/nerdtree'
 Plug 'tsony-tsonev/nerdtree-git-plugin'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'ryanoasis/vim-devicons'
-Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vbe0201/vimdiscord'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'morhetz/gruvbox'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'iCyMind/NeoSolarized'
 Plug 'vim-test/vim-test'
 
 call plug#end()
-
-" -------------------------------------------------------------------------------------------------------------
-" -------------------------------------------------------------------------------------------------------------
-" -------------------------------------------------------------------------------------------------------------
-" -------------------------------------------------------------------------------------------------------------
 
 "
 " general settings
@@ -60,28 +39,6 @@ set backspace=indent,eol,start
 
 set encoding=UTF-8
 
-" set vagrantfile filetype to ruby
-autocmd BufReadPost vagrantfile setlocal filetype=ruby
-autocmd BufReadPost Vagrantfile setlocal filetype=ruby
-
-" set kotlinscript filetype to kotlin
-autocmd BufReadPost *.kts setlocal filetype=kotlin
-autocmd BufReadPost *.kts setlocal filetype=kotlin
-
-" from readme
-" if hidden is not set, TextEdit might fail.
-set hidden "Some servers have issues with backup files, see #649 set nobackup set nowritebackup " Better display for messages set cmdheight=2 " You will have bad experience for diagnostic messages when it's default 4000.
-set updatetime=300
-
-" don't give |ins-completion-menu| messages.
-set shortmess+=c
-
-" always show signcolumns
-set signcolumn=yes
-
-" Set the vim clipboard to the system clipboard
-set clipboard=unnamedplus
-
 " Tabbing shortcuts
 noremap <C-Tab> :<C-U>tabnext<CR>
 inoremap <C-Tab> <C-\><C-N>:tabnext<CR>
@@ -102,23 +59,6 @@ set path+=**
 
 set wildmenu
 
-" -------------------------------------------------------------------------------------------------------------
-" -------------------------------------------------------------------------------------------------------------
-" -------------------------------------------------------------------------------------------------------------
-" -------------------------------------------------------------------------------------------------------------
-
-"
-" theme settings
-"
-set background=dark
-
-" colorscheme hybrid_reverse
-" colorscheme NeoSolarized
-" colorscheme gruvbox
-
-" If you are using the solarized theme, enable it to set the background color
-" let g:airline_solarized_bg='dark'
-
 " For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -137,11 +77,6 @@ noremap <C-S-z> :redo<CR>
 map <C-z> :u<CR>
 map <C-S-z> :redo<CR>
 
-" -------------------------------------------------------------------------------------------------------------
-" -------------------------------------------------------------------------------------------------------------
-" -------------------------------------------------------------------------------------------------------------
-" -------------------------------------------------------------------------------------------------------------
-
 "
 " For fuzzy finder(ctrlp)
 "
@@ -149,11 +84,6 @@ let g:ctrlp_user_command = [
 \   '.git/',
 \   'git --git-dir=%s/.git ls-files -oc --exclude-standard'
 \ ]
-
-" -------------------------------------------------------------------------------------------------------------
-" -------------------------------------------------------------------------------------------------------------
-" -------------------------------------------------------------------------------------------------------------
-" -------------------------------------------------------------------------------------------------------------
 
 "
 " Vim prettier
@@ -164,11 +94,6 @@ let g:prettier#autoformat = 1
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
-" -------------------------------------------------------------------------------------------------------------
-" -------------------------------------------------------------------------------------------------------------
-" -------------------------------------------------------------------------------------------------------------
-" -------------------------------------------------------------------------------------------------------------
-
 "
 " Vimspect
 "
@@ -178,10 +103,6 @@ sign define vimspectorBP text=🔴 texthl=Normal
 sign define vimspectorBPDisabled text=🔵 texthl=Normal
 sign define vimspectorPC text=🔶 texthl=SpellBad
 
-" -------------------------------------------------------------------------------------------------------------
-" -------------------------------------------------------------------------------------------------------------
-" -------------------------------------------------------------------------------------------------------------
-" -------------------------------------------------------------------------------------------------------------
 
 "
 " NerdTree settings
@@ -226,24 +147,30 @@ endfunction
 " -------------------------------------------------------------------------------------------------------------
 " -------------------------------------------------------------------------------------------------------------
 
-"
-" COC settings
-"
 " Use tab for trigger completion with characters ahead and navigate
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin
 inoremap <silent><expr> <TAB>
-\  pumvisible() ? "\<C-n>" :
-\    <SID>CheckBackSpace() ? "\<TAB>" :
-\      coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-function! s:CheckBackSpace() abort
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use Ctrl+Space to trigger completion
-inoremap <silent><expr> <c-space> coc#refresh()
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
 " Use [g and ]g to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
