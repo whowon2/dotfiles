@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Import Current Theme
+DIR="$HOME/.config/bspwm"
+STYLE="forest"
+RASI="$DIR/themes/$STYLE/rofi/clip.rasi"
+
+# Run
+rofi -show clipboard -modi "clipboard:greenclip print" -theme $RASI
