@@ -1,35 +1,34 @@
 #! /bin/sh
 
+picom &
+pgrep -x sxhkd > /dev/null || sxhkd &
+export _JAVA_AWT_WM_NONREPARENTING=1
+
 BSPDIR="$HOME/.config/bspwm"
 
 export PATH="${PATH}:$BSPDIR/scripts"
 
-export _JAVA_AWT_WM_NONREPARENTING=1
-
-# picom --config .config/bspwm/picom.conf &
-pgrep -x sxhkd > /dev/null || sxhkd &
-
-bspc monitor DP-3 -d 1 2 3 4 5
-bspc monitor HDMI-1 -d 6 7 8 9 0
+bspc monitor -d DP-0 1 2 3 4 5 
+bspc monitor -d HDMI-0 6 7 8 9 0
 
 bspc config border_width         2
-bspc config window_gap          12
+bspc config window_gap           0
 
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
-bspc rule -a Gimp desktop='^8' state=floating follow=on
-bspc rule -a Chromium desktop='^2'
-bspc rule -a mplayer2 state=floating
-bspc rule -a Kupfer.py focus=on
-bspc rule -a Screenkey manage=off
+bspc config borderless_monocle true
+bspc config gapless_monocle true
+bspc config paddingless_monocle true
+bspc config single_monocle false
 bspc config focus_follows_pointer true
+bspc config presel_feedback true
+
+bspc wm --adopt-orphans
 
 xsetroot -cursor_name left_ptr
 
-flameshot &
-
-feh --bg-scale ~/Pictures/Wallpaper/deer.jpg &
+bash ~/.fehbg
 
 bspbar &
