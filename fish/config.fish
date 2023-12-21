@@ -3,6 +3,7 @@ if status is-interactive
 end
 
 zoxide init fish | source
+starship init fish | source
 
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
