@@ -17,7 +17,7 @@ fi
 printf "\nCreating symbolic links\n"
 
 # List of configuration directories
-CONFIG_DIRS=("alacritty" "bspwm" "fish")
+CONFIG_DIRS=("alacritty" "bspwm" "fish" "nvim")
 
 # Iterate over each configuration directory
 for DIR in "${CONFIG_DIRS[@]}"
@@ -27,19 +27,8 @@ do
     if test -L "$TARGET_FILE"; then
         echo "$TARGET_FILE exists."
     else
-        ln -s "~/.dotfiles/$DIR" "$HOME/.config"
+        ln -s "$HOME/.dotfiles/$DIR" "$HOME/.config"
         echo "$TARGET_FILE created!"
     fi
 done
-
-paru -S --noconfirm neovim ranger rofi feh dunst net-tools neofetch lolcat noto-fonts-emoji fortune-mod archlinux-keyring bspwm sxhkd discord fish flameshot gzip inetutils lsof nodejs npm pavucontrol python python-pip rustup sddm sddm-sugar-dark telegram-desktop thunar thunar-volman tmux ttf-jetbrains-mono-nerd unzip visual-studio-code-bin vivaldi  
-
-# Install rust
-
-rustup install stable
-rustup default stable
-
-# cargo install
-
-cargo install ytop exa bat zoxide ripgrep starship
 

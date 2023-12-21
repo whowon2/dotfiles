@@ -16,6 +16,8 @@ alias pd="pnpm dev"
 alias pps="pnpm prisma studio"
 alias nv="nvim"
 
+alias ls="exa"
+
 # pnpm
 set -gx PNPM_HOME "/home/rusarc/.local/share/pnpm"
 if not string match -q -- $PNPM_HOME $PATH
