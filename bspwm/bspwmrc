@@ -8,10 +8,10 @@ BSPDIR="$HOME/.config/bspwm"
 
 export PATH="${PATH}:$BSPDIR/scripts"
 
-bspc monitor -d DP-0 1 2 3 4 5 
-bspc monitor -d HDMI-0 6 7 8 9 0
+bspc monitor DP-0 -d 1 2 3 4 5 
+bspc monitor DP-2 -d 6 7 8 9 0
 
-bspc config border_width         2
+bspc config border_width         0
 bspc config window_gap           0
 
 bspc config split_ratio          0.52
