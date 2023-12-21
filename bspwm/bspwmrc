@@ -1,6 +1,6 @@
 #! /bin/sh
 
-picom &
+picom --config $HOME/.config/bspwm/picom.conf &
 pgrep -x sxhkd > /dev/null || sxhkd &
 export _JAVA_AWT_WM_NONREPARENTING=1
 
