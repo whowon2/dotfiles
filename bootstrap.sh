@@ -22,13 +22,9 @@ CONFIG_DIRS=("alacritty" "bspwm" "fish" "nvim")
 # Iterate over each configuration directory
 for DIR in "${CONFIG_DIRS[@]}"
 do
-    TARGET_FILE="$HOME/.config/$DIR"
-    
-    if test -L "$TARGET_FILE"; then
-        echo "$TARGET_FILE exists."
-    else
-        ln -s "$HOME/.dotfiles/$DIR" "$HOME/.config"
-        echo "$TARGET_FILE created!"
-    fi
+	TARGET_FILE="$HOME/.config/$DIR"
+	rm -rf "$HOME/.config/$DIR"
+	ln -s "$HOME/dotfiles/$DIR" "$HOME/.config"
+	echo "$TARGET_FILE created!"
 done
 
