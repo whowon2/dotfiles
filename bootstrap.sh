@@ -24,7 +24,8 @@ for DIR in "${CONFIG_DIRS[@]}"
 do
 	TARGET_FILE="$HOME/.config/$DIR"
 	rm -rf "$HOME/.config/$DIR"
-	ln -s "$HOME/dotfiles/$DIR" "$HOME/.config"
+	ln -s "$HOME/.dotfiles/$DIR" "$HOME/.config"
 	echo "$TARGET_FILE created!"
 done
 
+ln -s "$HOME/.dotfiles/.gitconfig" "$HOME"

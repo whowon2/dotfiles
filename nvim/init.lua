@@ -30,5 +30,8 @@ require("lazy").setup(
     -- load the colorscheme here
     vim.cmd([[colorscheme onedark]])
   end,
+},
+{
+
 }
 )
