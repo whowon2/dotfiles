@@ -1,31 +1,38 @@
-# Install paru
-
-echo "[*] Checking if paru is installed"
+#!/usr/bin/env fish
 
 if ! command -v paru &> /dev/null
-then
-	echo "paru not found, installing..."
 	cd /tmp
 	git clone https://aur.archlinux.org/paru.git
 	cd paru
 	makepkg -si
+  echo "paru installed"
 	rm -rf /tmp/paru
 else
 	echo "paru is already installed!"
-fi
+end
+
+paru -S alacritty bspwm sxhkd neovim rofi ranger neofetch flameshot
+
+chmod +x $HOME/.dotfiles/bspwm/bspwmrc
+chmod +x $HOME/.dotfiles/bspwm/sxhkdrc
 
 printf "\nCreating symbolic links\n"
 
-# List of configuration directories
-CONFIG_DIRS=("alacritty" "bspwm" "fish" "nvim")
+set CONFIG_DIR $HOME/.config
 
 # Iterate over each configuration directory
-for DIR in "${CONFIG_DIRS[@]}"
-do
-	TARGET_FILE="$HOME/.config/$DIR"
-	rm -rf "$HOME/.config/$DIR"
-	ln -s "$HOME/.dotfiles/$DIR" "$HOME/.config"
-	echo "$TARGET_FILE created!"
-done
+set DIRS alacritty bspwm fish nvim rofi
 
+for DIR in $DIRS
+  rm -rf $CONFIG_DIR/$DIR
+  ln -s $HOME/.dotfiles/$DIR $CONFIG_DIR
+  echo "$DIR config created"
+end
+
+rm -rf "$HOME/.gitconfig"
 ln -s "$HOME/.dotfiles/.gitconfig" "$HOME"
+
+rm -rf "$HOME/.xinitrc"
+ln -s "$HOME/.dotfiles/.xinitrc" "$HOME"
+
+set -U fish_user_paths $fish_user_path "$HOME/.dotfiles/rofi/scripts"

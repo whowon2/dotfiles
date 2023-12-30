@@ -1,10 +1,11 @@
 #! /bin/sh
 
 picom --config $HOME/.config/bspwm/picom.conf &
-pgrep -x sxhkd > /dev/null || sxhkd &
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 BSPDIR="$HOME/.config/bspwm"
+
+sxhkd -c $BSPDIR/sxhkdrc &
 
 export PATH="${PATH}:$BSPDIR/scripts"
 
