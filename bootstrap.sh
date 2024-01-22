@@ -1,5 +1,8 @@
 #!/usr/bin/env fish
 
+# Install Oh My Fish
+curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+
 if ! command -v paru &> /dev/null
 	cd /tmp
 	git clone https://aur.archlinux.org/paru.git
@@ -12,6 +15,10 @@ else
 end
 
 paru -S alacritty bspwm sxhkd neovim rofi ranger neofetch flameshot
+
+# Installing rust things
+cargo install zoxide
+cargo install starship
 
 chmod +x $HOME/.dotfiles/bspwm/bspwmrc
 chmod +x $HOME/.dotfiles/bspwm/sxhkdrc
