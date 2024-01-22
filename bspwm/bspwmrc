@@ -9,8 +9,8 @@ sxhkd -c $BSPDIR/sxhkdrc &
 
 export PATH="${PATH}:$BSPDIR/scripts"
 
-bspc monitor DP-2 -d 1 2 3 4 5 
-bspc monitor DP-4 -d 6 7 8 9 0
+bspc monitor DP-4 -d 1 2 3 4 5 
+bspc monitor DP-2 -d 6 7 8 9 0
 
 bspc config border_width         1
 bspc config window_gap           1
