@@ -3,10 +3,10 @@
 DOTDIR="$HOME/.dotfiles"
 
 # Check if packages are installed, and only install them if they're not
-for package in openssh github-cli fish neovim bspwm sxhkd rofi; do
+for package in openssh gnome-keyring github-cli fish neovim bspwm sxhkd rofi vivaldi ranger telegram-desktop unzip xorg-xsetroot rust pavucontrol nvidia-settings zoxide starship; do
     if ! pacman -Q $package &>/dev/null; then
         echo "$package not found, installing..."
-        pacman -S --noconfirm $package
+        paru -S --noconfirm $package
     else
         echo "$package is already installed"
     fi
@@ -20,6 +20,7 @@ create_symlink() {
         echo "Creating symlink for $link_name"
         rm -rf "$link_name"  # Remove if it exists as a file or dir
         ln -sf "$target" "$link_name"
+        echo "Symlink created for $link_name"
     else
         echo "Symlink for $link_name already exists, skipping"
     fi
@@ -27,18 +28,19 @@ create_symlink() {
 
 # Linking configurations
 create_symlink "$DOTDIR/.config/bspwm" "$HOME/.config/bspwm"
-echo "Done linking bspwm"
 
 create_symlink "$DOTDIR/.config/sxhkd" "$HOME/.config/sxhkd"
-echo "Done linking sxhkd"
 
 create_symlink "$DOTDIR/.config/nvim" "$HOME/.config/nvim"
-echo "Done linking nvim"
 
 create_symlink "$DOTDIR/.config/rofi" "$HOME/.config/rofi"
-echo "Done linking rofi"
 
 create_symlink "$DOTDIR/.config/fish" "$HOME/.config/fish"
-echo "Done linking fish"
+
+create_symlink "$DOTDIR/.xinitrc" "$HOME/.xinitrc"
+
+create_symlink "$DOTDIR/.Xresources" "$HOME/.Xresources"
+
+create_symlink "$DOTDIR/.gitconfig" "$HOME/.gitconfig"
 
 echo "Done!"
