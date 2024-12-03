@@ -1,45 +1,44 @@
-#!/usr/bin/env fish
+#!/usr/bin/bash
 
-# Install Oh My Fish
-curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+DOTDIR="$HOME/.dotfiles"
 
-if ! command -v paru &> /dev/null
-	cd /tmp
-	git clone https://aur.archlinux.org/paru.git
-	cd paru
-	makepkg -si
-  echo "paru installed"
-	rm -rf /tmp/paru
-else
-	echo "paru is already installed!"
-end
+# Check if packages are installed, and only install them if they're not
+for package in openssh github-cli fish neovim bspwm sxhkd rofi; do
+    if ! pacman -Q $package &>/dev/null; then
+        echo "$package not found, installing..."
+        pacman -S --noconfirm $package
+    else
+        echo "$package is already installed"
+    fi
+done
 
-paru -S alacritty bspwm sxhkd neovim rofi ranger neofetch flameshot
+# Check if symlinks already exist, and only create them if they don't
+create_symlink() {
+    local target=$1
+    local link_name=$2
+    if [ ! -L "$link_name" ]; then
+        echo "Creating symlink for $link_name"
+        rm -rf "$link_name"  # Remove if it exists as a file or dir
+        ln -sf "$target" "$link_name"
+    else
+        echo "Symlink for $link_name already exists, skipping"
+    fi
+}
 
-# Installing rust things
-cargo install zoxide
-cargo install starship
+# Linking configurations
+create_symlink "$DOTDIR/.config/bspwm" "$HOME/.config/bspwm"
+echo "Done linking bspwm"
 
-chmod +x $HOME/.dotfiles/bspwm/bspwmrc
-chmod +x $HOME/.dotfiles/bspwm/sxhkdrc
+create_symlink "$DOTDIR/.config/sxhkd" "$HOME/.config/sxhkd"
+echo "Done linking sxhkd"
 
-printf "\nCreating symbolic links\n"
+create_symlink "$DOTDIR/.config/nvim" "$HOME/.config/nvim"
+echo "Done linking nvim"
 
-set CONFIG_DIR $HOME/.config
+create_symlink "$DOTDIR/.config/rofi" "$HOME/.config/rofi"
+echo "Done linking rofi"
 
-# Iterate over each configuration directory
-set DIRS alacritty bspwm fish nvim rofi
+create_symlink "$DOTDIR/.config/fish" "$HOME/.config/fish"
+echo "Done linking fish"
 
-for DIR in $DIRS
-  rm -rf $CONFIG_DIR/$DIR
-  ln -s $HOME/.dotfiles/$DIR $CONFIG_DIR
-  echo "$DIR config created"
-end
-
-rm -rf "$HOME/.gitconfig"
-ln -s "$HOME/.dotfiles/.gitconfig" "$HOME"
-
-rm -rf "$HOME/.xinitrc"
-ln -s "$HOME/.dotfiles/.xinitrc" "$HOME"
-
-set -U fish_user_paths $fish_user_path "$HOME/.dotfiles/rofi/scripts"
+echo "Done!"
