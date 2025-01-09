@@ -37,10 +37,13 @@ create_symlink "$DOTDIR/.config/rofi" "$HOME/.config/rofi"
 
 create_symlink "$DOTDIR/.config/fish" "$HOME/.config/fish"
 
+create_symlink "$DOTDIR/.config/polybar" "$HOME/.config/polybar"
+
 create_symlink "$DOTDIR/.xinitrc" "$HOME/.xinitrc"
 
 create_symlink "$DOTDIR/.Xresources" "$HOME/.Xresources"
 
 create_symlink "$DOTDIR/.gitconfig" "$HOME/.gitconfig"
+
 
 echo "Done!"

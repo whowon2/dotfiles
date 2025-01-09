@@ -1,6 +1,13 @@
+if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
+  exec startx
+end
+
 if status is-interactive
     # Commands to run in interactive sessions can go here
 end
+
+zoxide init fish | source
+starship init fish | source
 
 set -x BUN_INSTALL "$HOME/.bun"
 set -x PATH $BUN_INSTALL/bin $PATH
@@ -13,3 +20,4 @@ alias pd="pnpm dev"
 alias pps="pnpm prisma studio"
 alias nv="nvim"
 alias ls="exa"
+alias zj="zellij"
