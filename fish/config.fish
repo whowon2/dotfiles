@@ -12,6 +12,7 @@ starship init fish | source
 set -x BUN_INSTALL "$HOME/.bun"
 set -x PATH $BUN_INSTALL/bin $PATH
 set -x PATH "$HOME/.config/rofi" $PATH
+set -x EDITOR "nvim"
 
 alias p3="python3"
 alias ct="cargo test"

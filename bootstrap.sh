@@ -22,22 +22,25 @@ create_symlink() {
         ln -sf "$target" "$link_name"
         echo "Symlink created for $link_name"
     else
-        echo "Symlink for $link_name already exists, skipping"
+        echo "Symlink for $link_name already exists, updating"
+        rm -rf "$link_name"
+        ln -sf "$target" "$link_name"
+        echo "Symlink updated for $link_name"
     fi
 }
 
 # Linking configurations
-create_symlink "$DOTDIR/.config/bspwm" "$HOME/.config/bspwm"
+create_symlink "$DOTDIR/bspwm" "$HOME/.config/bspwm"
 
-create_symlink "$DOTDIR/.config/sxhkd" "$HOME/.config/sxhkd"
+create_symlink "$DOTDIR/sxhkd" "$HOME/.config/sxhkd"
 
-create_symlink "$DOTDIR/.config/nvim" "$HOME/.config/nvim"
+create_symlink "$DOTDIR/nvim" "$HOME/.config/nvim"
 
-create_symlink "$DOTDIR/.config/rofi" "$HOME/.config/rofi"
+create_symlink "$DOTDIR/rofi" "$HOME/.config/rofi"
 
-create_symlink "$DOTDIR/.config/fish" "$HOME/.config/fish"
+create_symlink "$DOTDIR/fish" "$HOME/.config/fish"
 
-create_symlink "$DOTDIR/.config/polybar" "$HOME/.config/polybar"
+create_symlink "$DOTDIR/polybar" "$HOME/.config/polybar"
 
 create_symlink "$DOTDIR/.xinitrc" "$HOME/.xinitrc"
 
