@@ -3,7 +3,7 @@
 DOTDIR="$HOME/.dotfiles"
 
 # Check if packages are installed, and only install them if they're not
-for package in openssh gnome-keyring github-cli fish neovim telegram-desktop unzip rust pavucontrol nvidia-settings zoxide starship; do
+for package in openssh gnome-keyring github-cli fish neovim telegram-desktop unzip rust pavucontrol ripgrep eza zoxide starship; do
     if ! pacman -Q $package &>/dev/null; then
         echo "$package not found, installing..."
         paru -S --noconfirm $package
