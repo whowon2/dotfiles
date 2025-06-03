@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Function to start waybar and store its PID
+start_waybar() {
+    echo "Starting Waybar..."
+    waybar &
+    WAYBAR_PID=$!
+}
+
+# Function to stop waybar
+stop_waybar() {
+    echo "Stopping Waybar (PID $WAYBAR_PID)..."
+    kill "$WAYBAR_PID" 2>/dev/null
+}
+
+# Start Waybar
+start_waybar
+
+# Ensure Waybar is stopped when this script exits
+trap "stop_waybar" EXIT
+
+# Watch for config changes
+while inotifywait -r -e modify,create,delete ~/.config/waybar; do
+    echo "Config changed. Restarting Waybar..."
+    stop_waybar
+    start_waybar
+done
+

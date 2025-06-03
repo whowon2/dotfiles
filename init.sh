@@ -3,7 +3,7 @@
 DOTDIR="$HOME/.dotfiles"
 
 # Check if packages are installed, and only install them if they're not
-for package in openssh gnome-keyring github-cli fish neovim bspwm sxhkd rofi vivaldi ranger telegram-desktop unzip xorg-xsetroot rust pavucontrol nvidia-settings zoxide starship; do
+for package in openssh gnome-keyring github-cli fish neovim telegram-desktop unzip rust pavucontrol nvidia-settings zoxide starship; do
     if ! pacman -Q $package &>/dev/null; then
         echo "$package not found, installing..."
         paru -S --noconfirm $package
@@ -30,23 +30,16 @@ create_symlink() {
 }
 
 # Linking configurations
-create_symlink "$DOTDIR/bspwm" "$HOME/.config/bspwm"
-
-create_symlink "$DOTDIR/sxhkd" "$HOME/.config/sxhkd"
-
-create_symlink "$DOTDIR/nvim" "$HOME/.config/nvim"
-
-create_symlink "$DOTDIR/rofi" "$HOME/.config/rofi"
+create_symlink "$DOTDIR/.gitconfig" "$HOME/.gitconfig"
 
 create_symlink "$DOTDIR/fish" "$HOME/.config/fish"
 
-create_symlink "$DOTDIR/polybar" "$HOME/.config/polybar"
+create_symlink "$DOTDIR/ghostty" "$HOME/.config/ghostty"
 
-create_symlink "$DOTDIR/.xinitrc" "$HOME/.xinitrc"
+create_symlink "$DOTDIR/hypr" "$HOME/.config/hypr"
 
-create_symlink "$DOTDIR/.Xresources" "$HOME/.Xresources"
+create_symlink "$DOTDIR/waybar" "$HOME/.config/waybar"
 
-create_symlink "$DOTDIR/.gitconfig" "$HOME/.gitconfig"
-
+create_symlink "$DOTDIR/.zed" "$HOME/.config/zed"
 
 echo "Done!"

@@ -19,11 +19,18 @@ set --erase _asdf_shims
 zoxide init fish | source
 starship init fish | source
 
-set -x BUN_INSTALL "$HOME/.bun"
-set -x PATH $BUN_INSTALL/bin $PATH
-
 alias bx="bun x"
-alias chm="git checkout main"
-alias chb="git checkout -b"
+alias bd="bun dev"
+alias bt="bun test"
+alias px="pnpm dlx"
+alias pd="pnpm dev"
+alias vim="nvim"
+alias nv="nvim"
+
 alias ch="git checkout"
-alias zz="z .."
+alias chb="git checkout -b"
+alias chm="git checkout main"
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH
