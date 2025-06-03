@@ -31,15 +31,12 @@ create_symlink() {
 
 # Linking configurations
 create_symlink "$DOTDIR/.gitconfig" "$HOME/.gitconfig"
-
 create_symlink "$DOTDIR/fish" "$HOME/.config/fish"
-
 create_symlink "$DOTDIR/ghostty" "$HOME/.config/ghostty"
-
 create_symlink "$DOTDIR/hypr" "$HOME/.config/hypr"
-
 create_symlink "$DOTDIR/waybar" "$HOME/.config/waybar"
-
-create_symlink "$DOTDIR/.zed" "$HOME/.config/zed"
+create_symlink "$DOTDIR/zed" "$HOME/.config/zed"
+create_symlink "$DOTDIR/nvim" "$HOME/.config/nvim"
+create_symlink "$DOTDIR/vivaldi" "$HOME/.config/vivaldi"
 
 echo "Done!"
