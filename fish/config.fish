@@ -21,6 +21,7 @@ starship init fish | source
 
 set -x BUN_INSTALL "$HOME/.bun"
 set -x PATH $BUN_INSTALL/bin $PATH
+set -x PATH "$HOME/.local/bin" $PATH
 
 alias bx="bun x"
 alias chm="git checkout main"
@@ -28,3 +29,4 @@ alias chb="git checkout -b"
 alias ch="git checkout"
 alias zz="z .."
 alias nv="nvim"
+alias zj="zellij"

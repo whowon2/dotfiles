@@ -1,4 +1,6 @@
 #!/bin/bash
+#
+killall waybar
 
 # Function to start waybar and store its PID
 start_waybar() {
@@ -25,4 +27,3 @@ while inotifywait -r -e modify,create,delete ~/.config/waybar; do
     stop_waybar
     start_waybar
 done
-

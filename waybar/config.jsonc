@@ -1,56 +1,56 @@
 {
-	"layer": "top",
-	"margin-bottom": 0,
-	"margin-top": 0,
-	"modules-left": [ "custom/launcher", "hyprland/workspaces"],
-	"modules-center": ["hyprland/window"],
-	"modules-right": ["pulseaudio", "cpu", "memory", "tray", "clock"],
-	// Modules
-	"pulseaudio": {
-		"tooltip": false,
-		"scroll-step": 5,
-		"format": "{icon}  {volume}% | {format_source}",
-		"format-bluetooth": "{volume}% {icon} {format_source}",
-		"format-bluetooth-muted": " {icon} {format_source}",
-		"format-muted": " {format_source}",
-		"format-source": "{volume}% ",
-		"format-source-muted": "",
-		"on-click": "nu $HOME/dotfiles/toggle_audio.nu",
-		"on-click-middle": "pavucontrol",
-		"on-click-right": "mute",
-		"format-icons": {
-			"headphone": "",
-			"hands-free": "",
-			"headset": "",
-			"phone": "",
-			"portable": "",
-			"car": "",
-			"default": ["", "", ""]
-		}
-	},
-	"tray":{
-		"icon-size":18,
-		"spacing": 10
-	},
-	"cpu": {
-		"interval": 15,
-		"format": " {}%",
-		"max-length": 10
-	},
-	"memory": {
-		"interval": 30,
-		"format": " {}%",
-		"max-length": 10
-	},
-	"custom/launcher":{
-		"format": " ",
-		"on-click": "wofi -S drun"
-	},
-    // The code following below is given in the great documentation for Waybar status bar under Useful Utilities in Hyprland wiki
-	"hyrpland/workspaces": {
-	    "format": "{icon}",
-	    "on-scroll-up": "hyprctl dispatch workspace e+1",
-	    "on-scroll-down": "hyprctl dispatch workspace e-1",
-	    "on-click": "activate"
-	}
+  "layer": "top",
+  "margin-bottom": 0,
+  "margin-top": 0,
+  "modules-left": ["hyprland/workspaces"],
+  "modules-center": ["hyprland/window"],
+  "modules-right": ["pulseaudio", "cpu", "memory", "tray", "clock"],
+  // Modules
+  "pulseaudio": {
+    "tooltip": false,
+    "scroll-step": 5,
+    "format": "{icon}  {volume}% | {format_source}",
+    "format-bluetooth": "{volume}% {icon} {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
+    "on-click": "$HOME/.dotfiles/scripts/toggle_audio.sh",
+    "on-click-middle": "pavucontrol",
+    "on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""],
+    },
+  },
+  "tray": {
+    "icon-size": 18,
+    "spacing": 10,
+  },
+  "cpu": {
+    "interval": 15,
+    "format": " {}%",
+    "max-length": 10,
+  },
+  "memory": {
+    "interval": 30,
+    "format": " {}%",
+    "max-length": 10,
+  },
+  "custom/launcher": {
+    "format": " ",
+    "on-click": "wofi -S drun",
+  },
+  // The code following below is given in the great documentation for Waybar status bar under Useful Utilities in Hyprland wiki
+  "hyrpland/workspaces": {
+    "format": "{icon}",
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "on-click": "activate",
+  },
 }
