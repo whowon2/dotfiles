@@ -4,7 +4,7 @@
   "margin-top": 0,
   "modules-left": ["hyprland/workspaces"],
   "modules-center": ["hyprland/window"],
-  "modules-right": ["pulseaudio", "cpu", "memory", "tray", "clock"],
+  "modules-right": ["pulseaudio", "cpu", "memory", "battery", "tray", "clock"],
   // Modules
   "pulseaudio": {
     "tooltip": false,
@@ -14,7 +14,7 @@
     "format-bluetooth-muted": " {icon} {format_source}",
     "format-muted": " {format_source}",
     "format-source": "{volume}% ",
-    "format-source-muted": "",
+    "format-source-muted": " ",
     "on-click": "$HOME/.dotfiles/scripts/toggle_audio.sh",
     "on-click-middle": "pavucontrol",
     "on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
@@ -34,12 +34,12 @@
   },
   "cpu": {
     "interval": 15,
-    "format": " {}%",
+    "format": "  {}%",
     "max-length": 10,
   },
   "memory": {
     "interval": 30,
-    "format": " {}%",
+    "format": "  {}%",
     "max-length": 10,
   },
   "custom/launcher": {

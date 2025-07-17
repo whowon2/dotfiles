@@ -1,0 +1,111 @@
+* {
+  font-family: "JetbrainsMono Nerd Font", monospace;
+  font-size: 12px;
+  padding: 0;
+  margin: 0;
+}
+
+window#waybar {
+  background: transparent;
+  color: gray;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+  margin: 8px 8px 0 8px;
+}
+
+#workspaces button {
+  margin: 0 4px;
+  color: gray;
+  border-radius: 6px;
+  padding: 2px 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid transparent;
+  transition: ease 0.4s;
+}
+#workspaces button:hover {
+  border: 1px solid aqua;
+}
+#workspaces button:hover {
+  border: 1px solid aqua;
+}
+#workspaces button.active {
+  color: aqua;
+}
+
+#pulseaudio {
+  margin: 0 4px;
+  color: gray;
+  border-radius: 6px;
+  padding: 2px 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid transparent;
+  transition: ease 0.4s;
+}
+#pulseaudio:hover {
+  border: 1px solid aqua;
+}
+
+#cpu {
+  margin: 0 4px;
+  color: gray;
+  border-radius: 6px;
+  padding: 2px 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid transparent;
+  transition: ease 0.4s;
+}
+#cpu:hover {
+  border: 1px solid aqua;
+}
+
+#memory {
+  margin: 0 4px;
+  color: gray;
+  border-radius: 6px;
+  padding: 2px 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid transparent;
+  transition: ease 0.4s;
+}
+#memory:hover {
+  border: 1px solid aqua;
+}
+
+#tray {
+  margin: 0 4px;
+  color: gray;
+  border-radius: 6px;
+  padding: 2px 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid transparent;
+  transition: ease 0.4s;
+}
+#tray:hover {
+  border: 1px solid aqua;
+}
+
+#clock {
+  margin: 0 4px;
+  color: gray;
+  border-radius: 6px;
+  padding: 2px 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid transparent;
+  transition: ease 0.4s;
+  color: aqua;
+}
+#clock:hover {
+  border: 1px solid aqua;
+}
+
+#battery {
+  margin: 0 4px;
+  color: gray;
+}

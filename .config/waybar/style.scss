@@ -1,0 +1,83 @@
+// Variables
+$text-color: gray;
+$bg-color: rgba(0, 0, 0, 0.5);
+$accent-color: aqua;
+
+$padding: 2px 10px;
+$margin-side: 0 4px;
+$margin-modules: 8px;
+$margin-workspaces: 10px;
+$border-radius: 6px;
+
+// Global Styles
+* {
+    font-family: "JetbrainsMono Nerd Font", monospace;
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+}
+
+window#waybar {
+    background: transparent;
+    color: $text-color;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+    margin: $margin-modules $margin-modules 0 $margin-modules;
+}
+
+@mixin block-style {
+    margin: $margin-side;
+    color: $text-color;
+    border-radius: $border-radius;
+    padding: $padding;
+    background: $bg-color;
+    border: 1px solid transparent;
+    transition: ease 0.4s;
+
+    &:hover {
+        border: 1px solid $accent-color;
+    }
+}
+
+#workspaces {
+    button {
+        @include block-style;
+
+        &:hover {
+            border: 1px solid $accent-color;
+        }
+
+        &.active {
+            color: $accent-color;
+        }
+    }
+}
+
+#pulseaudio {
+    @include block-style;
+}
+#cpu {
+    @include block-style;
+}
+#memory {
+    @include block-style;
+}
+#tray {
+    @include block-style;
+}
+#clock {
+    @include block-style;
+    color: $accent-color;
+}
+
+#battery {
+    margin: $margin-side;
+    color: $text-color;
+}
