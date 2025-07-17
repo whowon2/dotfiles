@@ -1,36 +1,94 @@
-#!/usr/bin/bash
+
+#!/usr/bin/env bash
+set -euo pipefail
 
 DOTDIR="$HOME/.dotfiles"
+INTERACTIVE=true  # Set to false to skip prompts
 
-# Check if packages are installed, and only install them if they're not
-for package in openssh gnome-keyring github-cli fish neovim telegram-desktop unzip rust pavucontrol ripgrep eza zoxide starship; do
-    if ! pacman -Q $package &>/dev/null; then
-        echo "$package not found, installing..."
-        paru -S --noconfirm $package
-    else
-        echo "$package is already installed"
-    fi
+# Color codes
+GREEN='\033[1;32m'
+YELLOW='\033[1;33m'
+RED='\033[1;31m'
+RESET='\033[0m'
+
+info()    { echo -e "${GREEN}[INFO]${RESET} $*"; }
+warn()    { echo -e "${YELLOW}[WARN]${RESET} $*"; }
+error()   { echo -e "${RED}[ERROR]${RESET} $*" >&2; }
+prompt()  { read -rp "$(echo -e "${YELLOW}[PROMPT]${RESET} $* [y/N]: ")" ans; [[ $ans == [Yy]* ]]; }
+
+# Packages to install
+packages=(
+    openssh
+    gnome-keyring
+    github-cli
+    fish
+    neovim
+    telegram-desktop
+    unzip
+    rust
+    pavucontrol
+    ripgrep
+    eza
+    zoxide
+    starship
+)
+
+info "Starting dotfiles setup..."
+
+# Install packages
+for package in "${packages[@]}"; do
+    info "Checking $package..."
+    paru -S --needed --noconfirm "$package"
 done
 
-# Check if symlinks already exist, and only create them if they don't
-create_symlink() {
-    local target=$1
-    local link_name=$2
-    if [ ! -L "$link_name" ]; then
-        echo "Creating symlink for $link_name"
-        rm -rf "$link_name"  # Remove if it exists as a file or dir
-        ln -sf "$target" "$link_name"
-        echo "Symlink created for $link_name"
-    else
-        echo "Symlink for $link_name already exists, updating"
-        rm -rf "$link_name"
-        ln -sf "$target" "$link_name"
-        echo "Symlink updated for $link_name"
+# Backup function
+backup_existing() {
+    local file=$1
+    local backup="${file}.backup"
+
+    if [ -e "$file" ] && [ ! -L "$file" ]; then
+        if $INTERACTIVE; then
+            if prompt "$file exists. Backup and overwrite?"; then
+                mv "$file" "$backup"
+                info "Backed up $file to $backup"
+            else
+                warn "Skipped $file"
+                return 1
+            fi
+        else
+            mv "$file" "$backup"
+            info "Backed up $file to $backup"
+        fi
     fi
 }
 
-# Linking configurations
-create_symlink "$DOTDIR/.gitconfig" "$HOME/.gitconfig"
-create_symlink "$DOTDIR/.config" "$HOME/.config"
+# Symlink function
+create_symlink() {
+    local target=$1
+    local link_name=$2
 
-echo "Done!"
+    if [ -L "$link_name" ]; then
+        info "Updating existing symlink: $link_name"
+        ln -sf "$target" "$link_name"
+    elif [ -e "$link_name" ]; then
+        if backup_existing "$link_name"; then
+            info "Creating symlink: $link_name"
+            ln -s "$target" "$link_name"
+        fi
+    else
+        info "Creating symlink: $link_name"
+        ln -s "$target" "$link_name"
+    fi
+}
+
+# Link top-level dotfiles
+create_symlink "$DOTDIR/.gitconfig" "$HOME/.gitconfig"
+
+# Link .config contents individually
+info "Linking .config items..."
+for file in "$DOTDIR/.config/"*; do
+    name=$(basename "$file")
+    create_symlink "$file" "$HOME/.config/$name"
+done
+
+info "Dotfiles setup complete!"

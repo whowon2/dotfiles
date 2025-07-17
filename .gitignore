@@ -1,2 +1,7 @@
 discord/
 Podman*
+mimeapps.list
+pulse
+.config/clipse/tmp
+.config/clipse/*clipboard_history.json
+.config/clipse/clipse.log
