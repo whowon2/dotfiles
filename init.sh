@@ -30,7 +30,28 @@ packages=(
     ripgrep
     eza
     zoxide
+    zellij
     starship
+    hyprshot
+    hyprlock
+    hyprpaper
+    xdg-desktop-portal-hyprland
+    wlogout
+    waybar
+    valkey
+    unzip
+    postman
+    podman-desktop
+    pipewire
+    pipewire-alsa
+    pipewire-audio
+    pipewire-jack
+    pipewire-pulse
+    inotify-tools
+    asdf-vm
+    nautilus
+    ly
+    ghostty
 )
 
 info "Starting dotfiles setup..."

@@ -2,6 +2,6 @@ discord/
 Podman*
 mimeapps.list
 pulse
-.config/clipse/tmp
+.config/clipse/tmp_files
 .config/clipse/*clipboard_history.json
 .config/clipse/clipse.log
