@@ -13,3 +13,4 @@ pulse
 .config/user-dirs*
 .config/QtProject.conf
 .config/pavucontrol.ini
+.config/dconf
