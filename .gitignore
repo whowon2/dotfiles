@@ -5,3 +5,11 @@ pulse
 .config/clipse/tmp_files
 .config/clipse/*clipboard_history.json
 .config/clipse/clipse.log
+.config/Insomnia
+.config/Postman
+.config/gcloud
+.config/google-chrome
+.config/jgit
+.config/user-dirs*
+.config/QtProject.conf
+.config/pavucontrol.ini

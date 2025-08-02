@@ -26,11 +26,3 @@ alias px="pnpm dlx"
 alias pd="pnpm dev"
 alias vim="nvim"
 alias nv="nvim"
-
-alias ch="git checkout"
-alias chb="git checkout -b"
-alias chm="git checkout main"
-
-# bun
-set --export BUN_INSTALL "$HOME/.bun"
-set --export PATH $BUN_INSTALL/bin $PATH

@@ -3,3 +3,5 @@
 	name = juaniwk3
 [init]
 	defaultBranch = main
+[alias]
+	copystaged = "!git diff --staged | clipse -c"
