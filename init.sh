@@ -16,51 +16,6 @@ warn()    { echo -e "${YELLOW}[WARN]${RESET} $*"; }
 error()   { echo -e "${RED}[ERROR]${RESET} $*" >&2; }
 prompt()  { read -rp "$(echo -e "${YELLOW}[PROMPT]${RESET} $* [y/N]: ")" ans; [[ $ans == [Yy]* ]]; }
 
-# Packages to install
-packages=(
-    openssh
-    gnome-keyring
-    github-cli
-    fish
-    neovim
-    telegram-desktop
-    unzip
-    rust
-    pavucontrol
-    ripgrep
-    eza
-    zoxide
-    zellij
-    starship
-    hyprshot
-    hyprlock
-    hyprpaper
-    xdg-desktop-portal-hyprland
-    wlogout
-    waybar
-    valkey
-    unzip
-    postman
-    podman-desktop
-    pipewire
-    pipewire-alsa
-    pipewire-audio
-    pipewire-jack
-    pipewire-pulse
-    inotify-tools
-    asdf-vm
-    nautilus
-    ly
-    ghostty
-)
-
-info "Starting dotfiles setup..."
-
-# Install packages
-for package in "${packages[@]}"; do
-    info "Checking $package..."
-    paru -S --needed --noconfirm "$package"
-done
 
 # Backup function
 backup_existing() {
