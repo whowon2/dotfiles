@@ -62,7 +62,7 @@ create_symlink "$DOTDIR/.gitconfig" "$HOME/.gitconfig"
 
 # Link .config contents individually
 info "Linking .config items..."
-for file in "$DOTDIR/.config/"*; do
+for file in "$DOTDIR/config/"*; do
     name=$(basename "$file")
     create_symlink "$file" "$HOME/.config/$name"
 done

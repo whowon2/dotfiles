@@ -1,0 +1,34 @@
+layout {
+    tab name="back" {
+        pane name="code" size="80%" edit="~/work/saude-backend" {
+            cwd "~/work/saude-backend"
+        }
+        pane split_direction="vertical" size="20%" {
+            pane command="pnpm" {
+                cwd "~/work/saude-backend"
+                args "dev"
+            }
+            pane command="pnpm" {
+                cwd "~/work/saude-backend"
+                args "test"
+            }
+        }
+        pane size=2 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+    }
+    tab name="front" {
+        pane name="code" size="80%" edit="~/work/saude-frontend" {
+            cwd "~/work/saude-frontend"
+        }
+        pane split_direction="vertical" size="20%" {
+            pane command="pnpm" {
+                cwd "~/work/saude-frontend"
+                args "dev"
+            }
+        }
+        pane size=2 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+    }
+}
